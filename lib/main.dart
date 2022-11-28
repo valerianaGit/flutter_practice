@@ -66,7 +66,11 @@ class CounterWidget extends StatefulWidget {
 }
 
 class _CounterWidgetState extends State<CounterWidget> {
+  // parameter we can access with global key
   int counter = 0;
+  // method we can access with global key 
+  // notice we still use set state in the stateful widget
+  // since global key is used to track state of stateful widgets 
   void increment() => setState(() {
         counter += 5;
       });
