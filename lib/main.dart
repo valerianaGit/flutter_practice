@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// declare providers
+final helloWorldProvider = Provider((_) => 'Hello world');
 void main() {
-  runApp(const MyApp());
+  // build Providerscope at root of your app
+  runApp( const ProviderScope(child: MyApp()) );
 }
 
-class MyApp extends StatelessWidget {
+// make classes that depend on providers extend Consumer Widget 
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  // add the WidgetRef to the build constructor of the widget, to have reference to it 
+  Widget build(BuildContext context, WidgetRef ref) {
+    // declare the value to be used 
+    final String value = ref.watch(helloWorldProvider);
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+      home: Scaffold(
+        // use the 
+        appBar: AppBar(title: Text(value)),
+        body: Center(child: Text(value),),
       ),
-      home: BasicKeyPage(),
     );
   }
 }
